@@ -377,7 +377,7 @@ function writeFile() {
     data: dataArray,
   });
 
-  fetch("http://localhost:5001/post", {
+  fetch("http://162.243.166.30:5001/post", {
     method: "post",
     headers: {
       Accept: "application/json, text/plain, */*",
