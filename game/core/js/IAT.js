@@ -373,6 +373,7 @@ function writeFile() {
   }
 
   let final = JSON.stringify({
+    category: "FABGender",
     name: ID,
     data: dataArray,
   });

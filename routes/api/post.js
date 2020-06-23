@@ -41,6 +41,7 @@ function getDate() {
 router.post("/", async (req, res) => {
   const fileName = req.body.name;
   const values = req.body.data;
+  const category = req.body.category;
 
   try {
     await cred.authorize();
@@ -49,7 +50,7 @@ router.post("/", async (req, res) => {
     const file = await drive.files.create({
       auth: cred,
       resource: {
-        name: fileName + "_" + getDate(),
+        name: category + "_" + fileName + "_" + getDate(),
         mimeType: "application/vnd.google-apps.spreadsheet",
       },
     });
