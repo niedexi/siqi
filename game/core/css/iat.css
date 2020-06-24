@@ -17,6 +17,7 @@ body {
   width: 700px;
   height: 700px;
   border: solid black 1px;
+  position: relative;
 }
 
 #header {
@@ -36,14 +37,18 @@ body {
 }
 
 #exp_instruct {
-  margin: 15px;
+  width: 600px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 #under_instruct {
   margin-left: auto;
   margin-right: auto;
   margin-top: 10px;
-  width: 600px;
+  width: 700px;
 }
 
 .itemdiv {
@@ -57,6 +62,10 @@ body {
   margin-right: auto;
   height: 280px;
   display: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 #word {
@@ -68,6 +77,7 @@ body {
 #wrong {
   margin-left: auto;
   margin-right: auto;
+  margin-top: 400px;
   height: 80px;
   display: none;
 }
