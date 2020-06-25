@@ -183,8 +183,12 @@ function initRounds() {
         numrounds = 40;
         break;
     }
-    prevIndexA = -1;
-    prevIndex1 = -1;
+
+    let imgItemA = [];
+    let imgItemB = [];
+    let txtItem1 = [];
+    let txtItem2 = [];
+
     for (var j = 0; j < numrounds; j++) {
       var round = new IATround();
 
@@ -212,6 +216,7 @@ function initRounds() {
         }
       }
       // pick a category
+      // catA
       if (round.category == template.catA.datalabel) {
         round.itemtype = template.catA.itemtype;
         if (i < 4) {
@@ -220,47 +225,76 @@ function initRounds() {
           round.correct = 2;
         }
 
-        // pick an item different from the last
         do {
           round.catIndex = Math.floor(
             Math.random() * template.catA.items.length
           );
-        } while (prevIndexA == round.catIndex);
-        prevIndexA = round.catIndex;
-      } else if (round.category == template.catB.datalabel) {
+        } while (
+          // condition
+          round.catIndex == imgItemA[imgItemA.length - 1] ||
+          (imgItemA.length < template.catA.items.length &&
+            imgItemA.includes(round.catIndex))
+        );
+
+        imgItemA.push(round.catIndex);
+      }
+      // catB
+      else if (round.category == template.catB.datalabel) {
         round.itemtype = template.catB.itemtype;
         if (i < 4) {
           round.correct = 2;
         } else {
           round.correct = 1;
         }
-        // pick an item different from the last
+
         do {
           round.catIndex = Math.floor(
             Math.random() * template.catB.items.length
           );
-        } while (prevIndexA == round.catIndex);
-        prevIndexA = round.catIndex;
-      } else if (round.category == template.cat1.datalabel) {
+        } while (
+          // condition
+          round.catIndex == imgItemB[imgItemB.length - 1] ||
+          (imgItemB.length < template.catB.items.length &&
+            imgItemB.includes(round.catIndex))
+        );
+
+        imgItemB.push(round.catIndex);
+      }
+      // cat1
+      else if (round.category == template.cat1.datalabel) {
         round.itemtype = template.cat1.itemtype;
         round.correct = 1;
-        // pick an item different from the last
+
         do {
           round.catIndex = Math.floor(
             Math.random() * template.cat1.items.length
           );
-        } while (prevIndex1 == round.catIndex);
-        prevIndex1 = round.catIndex;
-      } else if (round.category == template.cat2.datalabel) {
+        } while (
+          // condition
+          round.catIndex == txtItem1[txtItem1.length - 1] ||
+          (txtItem1.length < template.cat1.items.length &&
+            txtItem1.includes(round.catIndex))
+        );
+
+        txtItem1.push(round.catIndex);
+      }
+      // cat2
+      else if (round.category == template.cat2.datalabel) {
         round.itemtype = template.cat2.itemtype;
         round.correct = 2;
-        // pick an item different from the last
+
         do {
           round.catIndex = Math.floor(
             Math.random() * template.cat2.items.length
           );
-        } while (prevIndex1 == round.catIndex);
-        prevIndex1 = round.catIndex;
+        } while (
+          // condition
+          round.catIndex == txtItem2[txtItem2.length - 1] ||
+          (txtItem2.length < template.cat2.items.length &&
+            txtItem2.includes(round.catIndex))
+        );
+
+        txtItem2.push(round.catIndex);
       }
 
       roundArray[i].push(round);
