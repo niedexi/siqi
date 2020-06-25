@@ -189,14 +189,32 @@ function initRounds() {
     let txtItem1 = [];
     let txtItem2 = [];
 
+    let male = 0;
+    let female = 0;
+
     for (var j = 0; j < numrounds; j++) {
       var round = new IATround();
 
       if (stype == "target") {
-        round.category =
-          Math.random() < 0.5
-            ? template.catA.datalabel
-            : template.catB.datalabel;
+        let picker = Math.random();
+        if (male < 8 && female < 8) {
+          if (picker < 0.5) {
+            round.category = template.catA.datalabel;
+            male++;
+          } else {
+            round.category = template.catB.datalabel;
+            female++;
+          }
+        } else if (male == 8 && female < 8) {
+          round.category = template.catB.datalabel;
+          female++;
+        } else if (male < 8 && female == 8) {
+          round.category = template.catA.datalabel;
+          male++;
+        } else {
+          round.category =
+            picker < 0.5 ? template.catA.datalabel : template.catB.datalabel;
+        }
       } else if (stype == "association") {
         round.category =
           Math.random() < 0.5
