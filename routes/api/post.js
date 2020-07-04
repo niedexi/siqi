@@ -42,6 +42,7 @@ router.post("/", async (req, res) => {
   const fileName = req.body.name;
   const values = req.body.data;
   const category = req.body.category;
+  const folder = req.body.folderID;
 
   try {
     await cred.authorize();
@@ -50,6 +51,7 @@ router.post("/", async (req, res) => {
     const file = await drive.files.create({
       auth: cred,
       resource: {
+        parents: [folder],
         name: category + "_" + fileName + "_" + getDate(),
         mimeType: "application/vnd.google-apps.spreadsheet",
       },
