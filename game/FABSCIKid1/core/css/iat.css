@@ -1,0 +1,83 @@
+body {
+  background: none repeat scroll 0 0 #ffffff;
+  border: 0 none;
+  font-size: 20px;
+}
+
+#instructions {
+  width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 50px;
+}
+
+#experiment_frame {
+  margin-left: auto;
+  margin-right: auto;
+  width: 700px;
+  height: 700px;
+  border: solid black 1px;
+  position: relative;
+}
+
+#header {
+  height: 120px;
+}
+
+#left_cat {
+  font-size: 1.5em;
+  margin: 15px;
+  float: left;
+}
+
+#right_cat {
+  font-size: 1.5em;
+  margin: 15px;
+  float: right;
+}
+
+#exp_instruct {
+  width: 600px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+#under_instruct {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10px;
+  width: 700px;
+}
+
+.itemdiv {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.IATitem {
+  font-size: 2em;
+  margin-left: auto;
+  margin-right: auto;
+  height: 280px;
+  display: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+#word {
+  max-height: 115px;
+  text-align: center;
+  padding-top: 85px;
+  color: green;
+}
+#wrong {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 400px;
+  height: 80px;
+  display: none;
+}
