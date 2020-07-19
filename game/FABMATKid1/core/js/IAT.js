@@ -89,10 +89,10 @@ function loadInstructions(stage) {
       });
       break;
     case "four":
-      $.get("core/instruct4.html", function (data) {
-        $("#instructions").html(data);
-      });
-      break;
+        $.get("core/instruct4.html", function (data) {
+          $("#instructions").html(data);
+        });
+    break;
     case "IAT":
       $.get("core/IAT.html", function (data) {
         $("body").html(data);
@@ -402,7 +402,7 @@ function instructionPage() {
     writeFile();
 
     resulttext =
-      "<div style='text-align:center;padding:20px'>Excellent job! You have completed the game!</div> <img src='core/Gift.jpg' class='center'>";
+      "<div style='text-align:center;padding:20px'>Excellent job! You have completed the game!</div>";
     $("#picture_frame").html(resulttext);
   } else {
     $.get("core/gInstruct" + (session + 1) + ".html", function (data) {
