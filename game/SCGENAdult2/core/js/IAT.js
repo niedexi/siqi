@@ -7,35 +7,17 @@ let template = {
     items: ["genius", "brainy", "brilliant", "gifted", "super-smart"],
   },
   cat1: {
-    label: "Female",
-    datalabel: "F",
-    itemtype: "img",
-    items: [
-      "f1.jpg",
-      "f2.jpg",
-      "f3.jpg",
-      "f4.jpg",
-      "f5.jpg",
-      "f6.jpg",
-      "f7.jpg",
-      "f8.jpg",
-    ],
-  },
-  cat2: {
     label: "Male",
     datalabel: "M",
-    itemtype: "img",
-    items: [
-      "m1.jpg",
-      "m2.jpg",
-      "m3.jpg",
-      "m4.jpg",
-      "m5.jpg",
-      "m6.jpg",
-      "m7.jpg",
-      "m8.jpg",
-    ],
-},
+    itemtype: "txt",
+    items: ["man", "male", "boy", "husband", "father", "uncle", "son"],
+  },
+  cat2: {
+    label: "Female",
+    datalabel: "F",
+    itemtype: "txt",
+    items: ["woman", "female", "girl", "wife", "mother", "aunt", "daughter"],
+  },
 };
 
 //Generate subject ID
@@ -91,46 +73,13 @@ function startIAT() {
   session = 0;
   roundnum = 0;
 
-  // make the target or association words green
-  open1 = "<font color=green>";
-    close1 = "</font>";
+// Set up labels 
+  open1 = "";
+    close1 = "";
     openA = "";
     closeA = "";
-  buildPage();
   roundArray = initRounds();
   instructionPage();
-}
-
-// Adds all images to page (initially hidden) so they are pre-loaded for IAT
-function buildPage() {
-  if (template.cat1.itemtype == "img") {
-    for (i in template.cat1.items) {
-      var itemstr =
-        '<img id="' +
-        template.cat1.datalabel +
-        i +
-        '" class="IATitem" src="templates/' +
-        template.name +
-        "/img/" +
-        template.cat1.items[i] +
-        '">';
-      $("#exp_instruct").after(itemstr);
-    }
-  }
-  if (template.cat2.itemtype == "img") {
-    for (i in template.cat2.items) {
-      var itemstr =
-        '<img id="' +
-        template.cat2.datalabel +
-        i +
-        '" class="IATitem" src="templates/' +
-        template.name +
-        "/img/" +
-        template.cat2.items[i] +
-        '">';
-      $("#exp_instruct").after(itemstr);
-    }
-  }
 }
 
 // Round object
@@ -152,26 +101,26 @@ function initRounds() {
     roundArray[i] = [];
     switch (i) {
       case 0:
-        stype = "ci";
+        stype = "ic";
         numrounds = 24;
         break;
       case 1:
-        stype = "ci";
+        stype = "ic";
         numrounds = 72;
         break;
       case 2:
-        stype = "ic";
+        stype = "ci";
         numrounds = 24;
         break;
       case 3:
-        stype = "ic";
+        stype = "ci";
         numrounds = 72;
         break;
     }
 
     let txtItemA = [];
-    let imgItem1 = [];
-    let imgItem2 = [];
+    let txtItem1 = [];
+    let txtItem2 = [];
 
     let geniusCount = 0;
     let maleCount = 0;
@@ -190,27 +139,27 @@ function initRounds() {
 
       //Congruent-first
       if (stype == "ci") {
-        //Pick male
+        //Pick female
         if (picker == 0) {
-          if (maleCount < roundType.ten) {
+          if (femaleCount < roundType.ten) {
             round.category = template.cat2.datalabel;
-            maleCount++;
-          } else if (femaleCount < roundType.seven) {
-            round.category = template.cat1.datalabel;
             femaleCount++;
+          } else if (maleCount < roundType.seven) {
+            round.category = template.cat1.datalabel;
+            maleCount++;
           } else {
             round.category = template.catA.datalabel;
             geniusCount++;
           }
         }
-        //Pick female
+        //Pick male
         else if (picker == 1){
-          if (femaleCount < roundType.seven) {
+          if (maleCount < roundType.seven) {
             round.category = template.cat1.datalabel;
-            femaleCount++;
-          } else if (maleCount < roundType.ten) {
-            round.category = template.cat2.datalabel;
             maleCount++;
+          } else if (femaleCount < roundType.ten) {
+            round.category = template.cat2.datalabel;
+            femaleCount++;
           } else {
             round.category = template.catA.datalabel;
             geniusCount++;
@@ -221,38 +170,38 @@ function initRounds() {
           if (geniusCount < roundType.seven) {
             round.category = template.catA.datalabel;
             geniusCount++;
-          } else if (maleCount < roundType.ten) {
+          } else if (femaleCount < roundType.ten) {
             round.category = template.cat2.datalabel;
-            maleCount++;
+            femaleCount++;
           } else {
             round.category = template.cat1.datalabel;
-            femaleCount++;
+            maleCount++;
           }
         }
       }
       //Incongruent-first
       if (stype == "ic") {
-        //Pick female
+        //Pick male
         if (picker == 0) {
-          if (femaleCount < roundType.ten) {
+          if (maleCount < roundType.ten) {
             round.category = template.cat1.datalabel;
-            femaleCount++;
-          } else if (maleCount < roundType.seven) {
-            round.category = template.cat2.datalabel;
             maleCount++;
+          } else if (femaleCount < roundType.seven) {
+            round.category = template.cat2.datalabel;
+            femaleCount++;
           } else {
             round.category = template.catA.datalabel;
             geniusCount++;
           }
         }
-        //Pick male
+        //Pick female
         else if (picker == 1){
-          if (maleCount < roundType.seven) {
+          if (femaleCount < roundType.seven) {
             round.category = template.cat2.datalabel;
-            maleCount++;
-          } else if (femaleCount < roundType.ten) {
-            round.category = template.cat1.datalabel;
             femaleCount++;
+          } else if (maleCount < roundType.ten) {
+            round.category = template.cat1.datalabel;
+            maleCount++;
           } else {
             round.category = template.catA.datalabel;
             geniusCount++;
@@ -263,12 +212,12 @@ function initRounds() {
           if (geniusCount < roundType.seven) {
             round.category = template.catA.datalabel;
             geniusCount++;
-          } else if (femaleCount < roundType.ten) {
+          } else if (maleCount < roundType.ten) {
             round.category = template.cat1.datalabel;
-            femaleCount++;
+            maleCount++;
           } else {
             round.category = template.cat2.datalabel;
-            maleCount++;
+            femaleCount++;
           }
         }
       }
@@ -299,7 +248,7 @@ function initRounds() {
       // cat1
       else if (round.category == template.cat1.datalabel) {
         round.itemtype = template.cat1.itemtype;
-        round.correct = 1;
+        round.correct = 2;
 
         do {
           round.catIndex = Math.floor(
@@ -307,18 +256,18 @@ function initRounds() {
           );
         } while (
           // condition
-          round.catIndex == imgItem1[imgItem1.length - 1] ||
-          (imgItem1.length < template.cat1.items.length &&
-            imgItem1.includes(round.catIndex))
+          round.catIndex == txtItem1[txtItem1.length - 1] ||
+          (txtItem1.length < template.cat1.items.length &&
+            txtItem1.includes(round.catIndex))
         );
 
-        imgItem1.push(round.catIndex);
+        txtItem1.push(round.catIndex);
       }
 
       // cat2
       else if (round.category == template.cat2.datalabel) {
         round.itemtype = template.cat2.itemtype;
-        round.correct = 2;
+        round.correct = 1;
 
         do {
           round.catIndex = Math.floor(
@@ -326,12 +275,12 @@ function initRounds() {
           );
         } while (
           // condition
-          round.catIndex == imgItem2[imgItem2.length - 1] ||
-          (imgItem2.length < template.cat2.items.length &&
-            imgItem2.includes(round.catIndex))
+          round.catIndex == txtItem2[txtItem2.length - 1] ||
+          (txtItem2.length < template.cat2.items.length &&
+            txtItem2.includes(round.catIndex))
         );
 
-        imgItem2.push(round.catIndex);
+        txtItem2.push(round.catIndex);
       }
 
       roundArray[i].push(round);
@@ -349,7 +298,7 @@ function instructionPage() {
       $("#left_cat").ready(function () {
         $("#left_cat").html(
           openA +
-            template.cat1.label +
+            template.cat2.label +
             closeA +
             "<br>or<br>" +
             open1 +
@@ -358,15 +307,15 @@ function instructionPage() {
         );
       });
       $("#right_cat").ready(function () {
-        $("#right_cat").html(openA + template.cat2.label + closeA);
+        $("#right_cat").html(openA + template.cat1.label + closeA);
       });
       break;
     case 2:
     case 3:
-      $("#left_cat").html(openA + template.cat1.label + closeA);
+      $("#left_cat").html(openA + template.cat2.label + closeA);
       $("#right_cat").html(
         openA +
-          template.cat2.label +
+          template.cat1.label +
           closeA +
           "<br>or<br>" +
           open1 +
@@ -464,24 +413,18 @@ function displayItem() {
   tRound.starttime = new Date().getTime(); // the time the item was displayed
 
   $("#warning").css("display", "none");
-  if (tRound.itemtype == "txt") {
     if (tRound.category == template.catA.datalabel) {
       $("#word").html(open1 + template.catA.items[tRound.catIndex] + close1);
       $("#word").css("display", "block");
     }
-   } else if (tRound.itemtype == "img") {
-      if (tRound.category == template.cat1.datalabel) {
-      $("#" + template.cat1.datalabel + tRound.catIndex).css(
-        "display",
-        "block"
-        );
-  } else if (tRound.category == template.cat2.datalabel) {
-    $("#" + template.cat2.datalabel + tRound.catIndex).css(
-      "display",
-      "block"
-      );
+   else if (tRound.category == template.cat1.datalabel) {
+      $("#word").html(open1 + template.cat1.items[tRound.catIndex] + close1);
+      $("#word").css("display", "block");
     }
-  }
+   else if (tRound.category == template.cat2.datalabel) {
+      $("#word").html(open1 + template.cat2.items[tRound.catIndex] + close1);
+      $("#word").css("display", "block");
+    }
 
   warningMsg();
 }
