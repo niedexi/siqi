@@ -45,6 +45,8 @@ let template = {
     items: ["diligent", "dedicated", "driven", "persistent", "hard-working"],
   },
 };
+var baseurl = "http://ntuhss.az1.qualtrics.com/jfe/form/SV_8BNiqskoOpicF4V?iat=";
+var finalurl = "";
 
 //Generate subject ID
 function randomString(length) {
@@ -62,6 +64,7 @@ function initialize() {
     $("#instructions").html(data);
     var subjID = randomString(10);
     $("#subID").val(subjID);
+    finalurl = baseurl.concat(subjID);
   });
 }
 
@@ -392,8 +395,9 @@ function instructionPage() {
     writeFile();
 
     resulttext =
-      "<div style='text-align:center;padding:20px'>Thank you for participating in our study!</div>";
+      "<div style='text-align:center;padding:20px'>Thank you for participating in our study! Please wait to be redirected.</div>";
     $("#picture_frame").html(resulttext);
+    	window.location.href = finalurl;
   } else {
     $.get("core/gInstruct" + (session + 1) + ".html", function (data) {
       $("#exp_instruct").html(data);
