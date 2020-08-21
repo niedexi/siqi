@@ -42,7 +42,7 @@ let template = {
     label: "Diligent",
     datalabel: "D",
     itemtype: "txt",
-    items: ["diligent", "dedicated", "driven", "persistent", "hard-working"],
+    items: ["diligent", "committed", "conscientious", "dedicated", "super-studious"],
   },
 };
 var baseurl = "http://ntuhss.az1.qualtrics.com/jfe/form/SV_8BNiqskoOpicF4V?iat=";
@@ -390,15 +390,18 @@ function instructionPage() {
   if (session == 7) {
     $("#left_cat").html("");
     $("#right_cat").html("");
-    $("#exp_instruct").html("<img src='core/spinner.gif'>");
+    $("#exp_instruct").html("");
 
     writeFile();
-
+  
     resulttext =
-      "<div style='text-align:center;padding:20px'>Thank you for participating in our study! Please wait to be redirected.</div>";
+      "<div style='text-align:center;padding:20px'>Thank you for participating in our study! Please wait to be redirected.</div> <img id='#spinner' src='core/spinner.gif'>"; 
     $("#picture_frame").html(resulttext);
-    	window.location.href = finalurl;
-  } else {
+    function autoredirect() {
+      window.location.href = finalurl;}
+      setTimeout(autoredirect, 10000);
+}
+  else {
     $.get("core/gInstruct" + (session + 1) + ".html", function (data) {
       $("#exp_instruct").html(data);
     });
