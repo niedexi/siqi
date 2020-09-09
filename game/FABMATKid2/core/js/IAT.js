@@ -36,23 +36,16 @@ let template = {
     label: "Diligent",
     datalabel: "D",
     itemtype: "txt",
-    items: [
-      "diligent",
-      "conscientious",
-      "dedicated",
-      "focused",
-      "hard-working",
-    ],
+    items: ["diligent", "focused", "studious", "hard-working"],
   },
   cat2: {
     label: "Genius",
     datalabel: "G",
     itemtype: "txt",
-    items: ["genius", "brilliant", "brainy", "gifted", "super-smart"],
+    items: ["genius", "brilliant", "brainy", "super-smart"],
   },
 };
-var baseurl =
-  "http://ntuhss.az1.qualtrics.com/jfe/form/SV_37PpKLwkBlISaBD?iat=";
+var baseurl = "http://ntuhss.az1.qualtrics.com/jfe/form/SV_37PpKLwkBlISaBD?iat=";
 var finalurl = "";
 
 //Generate subject ID
@@ -99,10 +92,10 @@ function loadInstructions(stage) {
       });
       break;
     case "four":
-      $.get("core/instruct4.html", function (data) {
-        $("#instructions").html(data);
-      });
-      break;
+        $.get("core/instruct4.html", function (data) {
+          $("#instructions").html(data);
+        });
+    break;
     case "IAT":
       $.get("core/IAT.html", function (data) {
         $("body").html(data);
@@ -407,17 +400,18 @@ function instructionPage() {
   if (session == 7) {
     $("#left_cat").html("");
     $("#right_cat").html("");
-    // $("#exp_instruct").html("<img src='core/spinner.gif'>");
+   //("#exp_instruct").html("<img src='core/spinner.gif'>");
 
     writeFile();
 
-    resulttext = "<img id='spin' src='core/spinner.gif'>";
+  resulttext = 
+    "<img id='spin' src='core/spinner.gif'>";
     $("#picture_frame").html(resulttext);
     function autoredirect() {
-      window.location.href = finalurl;
-    }
-    setTimeout(autoredirect, 10000);
-  } else {
+      window.location.href = finalurl;}
+      setTimeout(autoredirect, 10000);
+}
+  else {
     $.get("core/gInstruct" + (session + 1) + ".html", function (data) {
       $("#exp_instruct").html(data);
     });
